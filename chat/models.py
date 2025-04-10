@@ -27,7 +27,7 @@ class Room(models.Model):
     CHOICES_STATUS = [(WAITING, "Waiting"), (ACTIVE, "Active"), (CLOSED, "Closed")]
 
     uuid = models.CharField(max_length=255)
-    client = models.CharField(max_length=255)
+    client = models.CharField(max_length=255, unique=True)
     agent = models.ForeignKey(
         User, related_name="rooms", blank=True, null=True, on_delete=models.SET_NULL
     )
