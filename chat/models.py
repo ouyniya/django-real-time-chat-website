@@ -27,7 +27,7 @@ class Room(models.Model):
     CHOICES_STATUS = [(WAITING, "Waiting"), (ACTIVE, "Active"), (CLOSED, "Closed")]
 
     uuid = models.CharField(max_length=255)
-    client = models.CharField(max_length=255, unique=True)
+    client = models.CharField(max_length=255)
     agent = models.ForeignKey(
         User, related_name="rooms", blank=True, null=True, on_delete=models.SET_NULL
     )
@@ -37,7 +37,7 @@ class Room(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        ordering: "-created_at"
+        ordering: ["-created_at"]
 
     def __str__(self):
         return f"{self.client} - {self.uuid}"

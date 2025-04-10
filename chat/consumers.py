@@ -6,6 +6,11 @@ from asgiref.sync import sync_to_async
 # Importing AsyncJsonWebsocketConsumer from Django Channels to create a consumer for handling WebSocket connections.
 from channels.generic.websocket import AsyncJsonWebsocketConsumer
 
+from django.utils.timesince import timesince
+
+from .templatetags.chatextras import initials
+
+
 # This class will handle WebSocket connections for chat rooms. It inherits from AsyncJsonWebsocketConsumer to handle JSON messages asynchronously.
 class ChatConsumer(AsyncJsonWebsocketConsumer):
 
@@ -28,3 +33,42 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
     async def disconnect(self, close_code):
         # Leaves the room group by removing the channel from the group. This ensures the WebSocket won't receive messages anymore.
         await self.channel_layer.group_discard(self.room_group_name, self.channel_name)
+
+    async def receive(self, text_data):
+        # receive message from Websocket front end
+        text_data_json = json.loads(text_data)
+        type = text_data_json["type"]
+        message = text_data_json["message"]
+        name = text_data_json["name"]
+        agent = text_data_json["agent"]
+
+        print("Receive: ", type)
+
+        if type == "message":
+            # send message to group
+            await self.channel_layer.group_send(
+                self.room_group_name,
+                {
+                    "type": "chat_message",
+                    "message": message,
+                    "name": name,
+                    "agent": agent,
+                    "initials": initials(name),
+                    "created_at": "",  # timesince(new_message.created_at),
+                },
+            )
+
+        async def chat_message(self, event):
+            # send message to WebSocket (front end)
+            await self.send(
+                text_data=json.dumps(
+                    {
+                        "type": event["type"],
+                        "message": event["message"],
+                        "name": event["name"],
+                        "agent": event["agent"],
+                        "initials": event["initials"],
+                        "created_at": event["created_at"],
+                    }
+                )
+            )

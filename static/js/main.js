@@ -79,6 +79,18 @@ async function joinChatRoom() {
   };
 }
 
+function sendMessage() {
+  chatSocket.send(
+    JSON.stringify({
+      type: "message",
+      message: chatInputElement.value,
+      name: chatName,
+    })
+  );
+  
+  chatInputElement.value = "";
+}
+
 // add Event Listener
 if (chatOpenElement) {
   // console.log("Button found!");
@@ -104,6 +116,16 @@ if (chatJoinElement) {
 
     joinChatRoom();
 
+    return false;
+  };
+} else {
+  console.log("Button not found.");
+}
+
+if (chatSubmitElement) {
+  chatSubmitElement.onclick = function (e) {
+    e.preventDefault();
+    sendMessage();
     return false;
   };
 } else {
