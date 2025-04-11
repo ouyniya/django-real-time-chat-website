@@ -19,6 +19,11 @@ const chatSubmitElement = document.querySelector("#chat_message_submit");
 const chatInputElement = document.querySelector("#chat_message_input");
 
 // function
+
+function scrollToBottom() {
+  chatLogElement.scrollTop = chatLogElement.scrollHeight;
+}
+
 function getCookie(name) {
   let cookieValue = null;
 
@@ -74,6 +79,7 @@ async function joinChatRoom() {
 
   chatSocket.onopen = function (e) {
     console.log("onOpen - chat socket was opened");
+    scrollToBottom()
   };
 
   chatSocket.onclose = function (e) {
@@ -97,7 +103,7 @@ function onChatMessage(data) {
   console.log("onChatMessage", data);
 
   if (data.type === "chat_message") {
-    console.log('agent***', data.agent)
+    console.log("agent***", data.agent);
     if (data.agent) {
       chatLogElement.innerHTML += `<div class="flex w-full mt-2 space-x-3 max-w-md">
           <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300 text-center pt-2">
@@ -125,6 +131,8 @@ function onChatMessage(data) {
         </div>`;
     }
   }
+
+  scrollToBottom();
 }
 
 // add Event Listener
@@ -167,3 +175,9 @@ if (chatSubmitElement) {
 } else {
   console.log("Button not found.");
 }
+
+chatInputElement.onkeyup = function (e) {
+  if (e.keyCode === 13) {
+    sendMessage();
+  }
+};
