@@ -43,7 +43,8 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         type = text_data_json["type"]
         message = text_data_json["message"]
         name = text_data_json["name"]
-        agent = text_data_json["agent"]
+        # agent = text_data_json["agent"]
+        agent = text_data_json.get("agent", None)
 
         print("Receive: ", type)
 
@@ -86,7 +87,8 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         message = Message.objects.create(body=message, sent_by=sent_by)
 
         if agent:
-            message.created_at = User.objects.get(pk=agent)
+            # message.created_at = User.objects.get(pk=agent)
+            message.agent = User.objects.get(pk=agent)
             message.save()
 
         self.room.messages.add(message)

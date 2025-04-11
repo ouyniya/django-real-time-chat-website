@@ -1,0 +1,84 @@
+{% extends 'core/base.html' %} {% load chatextras %} {% block content %}
+<h1 class="text-2xl">Room "{{ room.uuid }}"</h1>
+
+<hr class="my-6" />
+
+<p class="mb-6">
+  <b>Name:</b> {{ room.client }} <br />
+  <b>Started:</b> {{ room.created_at|timesince }} <br />
+  <b>Status:</b> {{ room.get_status_display }} <br />
+  <b>Page:</b> {{ room.url }} <br />
+  <b>Agent:</b> {% firstof room.created_by.name 'None yet...' %} <br />
+</p>
+
+<hr class="my-6" />
+
+<div
+  id="chat_log"
+  class="relative mb-4 p-4 bg-gray-100 rounded-xl h-[300px] overflow-auto flex flex-col flex-grow"
+>
+  {% for message in room.messages.all %}
+  <div
+    class="flex w-full max-w-md mt-2 space-x-3 {% if message.created_by %} ml-auto justify-end {% endif %}"
+  >
+    <!-- icon -->
+    {% if not message.created_by %}
+    <div
+      class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-200 text-center pt-2"
+    >
+      {{ message.sent_by|initials }}
+    </div>
+    {% endif %}
+
+    <!-- message -->
+    <div>
+      <!-- text message -->
+      <div
+        class="p-4 rounded-xl {% if message.created_by %} bg-blue-600 text-white {%else%} bg-gray-300 {% endif %}"
+      >
+        <p class="text-sm">{{ message.body }}</p>
+      </div>
+      <!-- time -->
+      <span class="text-xs text-gray-500 leading-none">
+        {{ message.created_at|timesince }}
+      </span>
+    </div>
+
+    {% if message.created_by %}
+    <div
+      class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-100 text-center pt-2"
+    >
+      {{ message.sent_by|initials }}
+    </div>
+
+    {% endif %}
+  </div>
+  {% endfor %}
+</div>
+
+<div class="relative flex gap-3">
+  <!-- writing box -->
+  {% if room.status == 'active' %}
+
+  <!-- input for writing -->
+  <input
+    type="text"
+    name="body"
+    id="chat_message_input"
+    class="w-full p-4 bg-gray-100 rounded-md"
+    placeholder="type your message here..."
+  />
+
+  <!-- send button -->
+  <button
+    id="chat_message_submit"
+    class="py-2 px-6 bg-rose-600 text-white rounded-md"
+  >
+    Send
+  </button>
+  {% endif %}
+</div>
+
+{% endblock %} {% block script %} {% if room.status == 'active' %}
+<script src="{% static 'js/main_admin.js' %}"></script>
+{% endif %} {% endblock %}

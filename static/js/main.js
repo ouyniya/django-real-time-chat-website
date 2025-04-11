@@ -97,6 +97,7 @@ function onChatMessage(data) {
   console.log("onChatMessage", data);
 
   if (data.type === "chat_message") {
+    console.log('agent***', data.agent)
     if (data.agent) {
       chatLogElement.innerHTML += `<div class="flex w-full mt-2 space-x-3 max-w-md">
           <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300 text-center pt-2">
@@ -106,7 +107,7 @@ function onChatMessage(data) {
             <div class="bg-gray-300 p-3 rounded-l-lg rounded-br-lg">
               <p class="text-sm">${data.message}</p>
             </div>
-            <span class="text-xs text-gray-500 leading-none">${data.created_at}</span>
+            <span class="text-xs text-gray-500 leading-none">${data.created_at} ago</span>
           </div>
         </div>`;
     } else {
@@ -115,7 +116,7 @@ function onChatMessage(data) {
             <div class="bg-blue-300 p-3 rounded-l-lg rounded-br-lg">
               <p class="text-sm">${data.message}</p>
             </div>
-            <span class="text-xs text-gray-500 leading-none">${data.created_at}</span>
+            <span class="text-xs text-gray-500 leading-none">${data.created_at} ago</span>
           </div>
 
             <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300 text-center pt-2">
