@@ -14,6 +14,19 @@ const chatSubmitElement = document.querySelector("#chat_message_submit");
 
 /** function */
 
+function sendMessage() {
+  chatSocket.send(
+    JSON.stringify({
+      type: "message",
+      message: chatInputElement.value,
+      name: JSON.parse(document.getElementById("user_name").textContent),
+      agent: JSON.parse(document.getElementById("user_id").textContent),
+    })
+  );
+
+  chatInputElement.value = "";
+}
+
 function onChatMessage(data) {
   console.log("onChatMessage", data);
 
@@ -64,4 +77,12 @@ chatSocket.onopen = function (e) {
 
 chatSocket.onclose = function (e) {
   console.log("chat socket closed unexpectedly");
+};
+
+/** Event listener */
+
+chatSubmitElement.onclick = function (e) {
+  e.preventDefault();
+  sendMessage();
+  return false;
 };
