@@ -1,4 +1,6 @@
-{% extends 'core/base.html' %} {% load chatextras %} {% block content %}
+{% extends 'core/base.html' %} {% load chatextras %} 
+{% load static %}
+{% block content %}
 <h1 class="text-2xl">Room "{{ room.uuid }}"</h1>
 
 <hr class="my-6" />
@@ -79,6 +81,8 @@
   {% endif %}
 </div>
 
-{% endblock %} {% block script %} {% if room.status == 'active' %}
+{% endblock %} 
+
+{% block script %} {% if room.status == 'active' %}
 <script src="{% static 'js/main_admin.js' %}"></script>
 {% endif %} {% endblock %}
