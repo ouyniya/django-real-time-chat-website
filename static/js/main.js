@@ -79,7 +79,7 @@ async function joinChatRoom() {
 
   chatSocket.onopen = function (e) {
     console.log("onOpen - chat socket was opened");
-    scrollToBottom()
+    scrollToBottom();
   };
 
   chatSocket.onclose = function (e) {
@@ -176,8 +176,12 @@ if (chatSubmitElement) {
   console.log("Button not found.");
 }
 
-chatInputElement.onkeyup = function (e) {
-  if (e.keyCode === 13) {
-    sendMessage();
-  }
-};
+if (chatInputElement) {
+  chatInputElement.onkeyup = function (e) {
+    if (e.keyCode === 13) {
+      sendMessage();
+    }
+  };
+} else {
+  console.log("Button not found.");
+}
