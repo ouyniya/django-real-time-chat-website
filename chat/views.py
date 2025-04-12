@@ -60,6 +60,22 @@ def room(request, uuid):
     return render(request, "chat/room.html", {"room": room})
 
 
+# Chat room delete
+@login_required
+def delete_room(request, uuid):
+    if request.user.has_perm("room.delete_room"):
+        # Get the specific room by UUID
+        room = Room.objects.get(uuid=uuid)
+        room.delete()
+
+        messages.success(request, "The room was deleted")
+        return redirect("/chat-admin/")
+    else:
+        # If user doesn't have permission, show error and redirect
+        messages.error(request, "You don't have access to delete users!")
+        return redirect("/chat-admin/")
+
+
 @login_required
 def user_detail(request, uuid):
     user = User.objects.get(pk=uuid)
