@@ -25,7 +25,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         # This ensures that multiple rooms don't overlap.
         self.room_group_name = f"chat_{self.room_name}"
 
-        self.user = self.scope.get('user', None)
+        self.user = self.scope.get("user", None)
         if self.user is None:
             await self.close()
             return
@@ -37,6 +37,15 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         # Accept the WebSocket connection, allowing further communication through it.
         await self.accept()
 
+        # Inform user
+        if self.user.is_staff:
+            await self.channel_layer.group_send(
+                self.room_group_name,
+                {
+                    "type": "users_update",
+                },
+            )
+
     # This is called when the WebSocket connection is closed.
     async def disconnect(self, close_code):
         # Leaves the room group by removing the channel from the group. This ensures the WebSocket won't receive messages anymore.
@@ -44,7 +53,6 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         # print('****' , self.user.is_staff)
         if not self.user.is_staff:
             await self.set_room_closed()
-
 
     async def receive(self, text_data):
         # receive message from Websocket front end
@@ -87,10 +95,13 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
             )
         )
 
+    async def users_update(self, event):
+        # Send information to the web socket
+        await self.send(text_data=json.dumps({"type": "users_update"}))
+
     @sync_to_async
     def get_room(self):
         self.room = Room.objects.get(uuid=self.room_name)
-
 
     @sync_to_async
     def set_room_closed(self):
@@ -98,8 +109,6 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         self.room.status = Room.CLOSED
         self.room.save()
 
-
-    
     @sync_to_async
     def create_message(self, sent_by, message, agent):
         message = Message.objects.create(body=message, sent_by=sent_by)
