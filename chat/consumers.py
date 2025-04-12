@@ -94,6 +94,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
 
     @sync_to_async
     def set_room_closed(self):
+        self.room = Room.objects.get(uuid=self.room_name)
         self.room.status = Room.CLOSED
         self.room.save()
 
