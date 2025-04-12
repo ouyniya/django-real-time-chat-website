@@ -3,7 +3,7 @@ let chatSocket = null;
 let chatWindowURL = window.location.href;
 let chatRoomUuid = Math.random().toString(36).slice(2, 12);
 
-console.log("chatid", chatRoomUuid);
+// console.log("chatid", chatRoomUuid);
 
 // elements
 
@@ -110,7 +110,7 @@ function onChatMessage(data) {
   // send a message
 
   if (data.type === "chat_message") {
-    console.log("agent***", data.agent);
+    // console.log("agent***", data.agent);
     if (data.agent) {
       chatLogElement.innerHTML += `<div class="flex w-full mt-2 space-x-3">
           <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300 text-center pt-2">
@@ -184,7 +184,7 @@ if (chatOpenElement) {
     return false;
   };
 } else {
-  console.log("Button not found.");
+  // console.log("Button not found.");
 }
 
 if (chatJoinElement) {
@@ -200,7 +200,7 @@ if (chatJoinElement) {
     return false;
   };
 } else {
-  console.log("Button not found.");
+  // console.log("Button not found.");
 }
 
 if (chatSubmitElement) {
@@ -210,7 +210,7 @@ if (chatSubmitElement) {
     return false;
   };
 } else {
-  console.log("Button not found.");
+  // console.log("Button not found.");
 }
 
 if (chatInputElement) {
@@ -220,7 +220,7 @@ if (chatInputElement) {
     }
   };
 } else {
-  console.log("Button not found.");
+  // console.log("Button not found.");
 }
 
 if (chatInputElement) {
@@ -234,5 +234,5 @@ if (chatInputElement) {
     );
   };
 } else {
-  console.log("Button not found.");
+  // console.log("Button not found.");
 }

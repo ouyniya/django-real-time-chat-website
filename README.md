@@ -21,8 +21,7 @@ Watch the demo:
 
 - Backend: Django, Django Channels
 - Frontend: Tailwind CSS, JavaScript
-- WebSockets: Real-time communication with WebSocket
-- Database: SQLite (default for Django projects, can be replaced with PostgreSQL)
+- Database: SQLite
 - Authentication: Django authentication system
 
 
@@ -42,25 +41,50 @@ Special thanks to the creator for the detailed step-by-step guide on building th
 Follow these steps to get the project running on your local machine:
 
 1. Clone the repository
-2. Install dependencies
+2. Create and active a virtual environment
+
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
+
+3. Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
+4. Install Node.js Dependencies for Tailwind
 
-### 🔐 Environment Variables
-
-To run this project locally, you need to set up a `.env` file in the root directory with the following variables:
-
-```env
-
+```bash
+npm install
 ```
 
-**Make sure to keep your .env file private and never commit it to source control.**
+Start Tailwind in watch mode:
+
+```bash
+npm run build:css
+```
+
+5. Configure the Database
+
+```bash
+python manage.py migrate
+```
+
+(Optional: Create superuser)
+
+```bash
+python manage.py createsuperuser
+```
+
+6. Run the Development Server
+
+```bash
+python manage.py runserver
+```
 
 Visit http://127.0.0.1:8000/ to view the chat website in action!
-
 
 
 ## 🤝 Contributing

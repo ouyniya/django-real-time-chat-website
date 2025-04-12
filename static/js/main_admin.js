@@ -4,7 +4,7 @@ const chatRoom = JSON.parse(document.getElementById("room_uuid").textContent);
 
 let chatSocket = null;
 
-console.log(chatRoom);
+// console.log(chatRoom);
 
 /* elements */
 
