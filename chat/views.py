@@ -74,6 +74,39 @@ def user_detail(request, uuid):
     )
 
 
+# edit user
+@login_required
+def edit_user(request, uuid):
+    # Check if current user has permission to add users
+    if request.user.has_perm("user.edit_user"):
+        user = User.objects.get(pk=uuid)
+
+        if request.method == "POST":
+            form = EditUserForm(request.POST, instance=user)
+
+            if form.is_valid:
+                form.save()
+
+                messages.success(request, "The changes were saved")
+                return redirect("/chat-admin/")
+        else:
+            form = EditUserForm(instance=user)
+
+        return render(
+            request,
+            "chat/edit_user.html",
+            {
+                "user": user,
+                "form": form,
+            },
+        )
+
+    else:
+        # If user doesn't have permission, show error and redirect
+        messages.error(request, "You don't have access to edit users!")
+        return redirect("/chat-admin/")
+
+
 # Add new user view (only if user has permission)
 @login_required
 def add_user(request):
