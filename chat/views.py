@@ -51,8 +51,27 @@ def room(request, uuid):
     # Get the specific room by UUID
     room = Room.objects.get(uuid=uuid)
 
+    if room.status == Room.WAITING:
+        room.status = Room.ACTIVE
+        room.agent = request.user
+        room.save()
+
     # Render the room template with the room object
     return render(request, "chat/room.html", {"room": room})
+
+
+@login_required
+def user_detail(request, uuid):
+    user = User.objects.get(pk=uuid)
+    rooms = user.rooms.all()
+    return render(
+        request,
+        "chat/user_detail.html",
+        {
+            "user": user,
+            "rooms": rooms,
+        },
+    )
 
 
 # Add new user view (only if user has permission)
@@ -60,19 +79,21 @@ def room(request, uuid):
 def add_user(request):
     # Check if current user has permission to add users
     if request.user.has_perm("user.add_user"):
-        print('***Begin adding user...')
+        print("***Begin adding user...")
         if request.method == "POST":
             form = AddUserForm(request.POST)  # Populate form with POST data
-            print('***form...', form)
+            print("***form...", form)
 
             print(request.POST)
 
             if form.is_valid():
-                print('***form.is_valid...')
-                user = form.save(commit=False)  # Create user object without saving to DB yet
+                print("***form.is_valid...")
+                user = form.save(
+                    commit=False
+                )  # Create user object without saving to DB yet
                 user.is_staff = True  # Set user as staff
-                
-                password = request.POST.get('password')
+
+                password = request.POST.get("password")
                 if password:
                     user.set_password(password)
                 else:
@@ -84,17 +105,20 @@ def add_user(request):
                 # Add user to "Managers" group if their role is MANAGER
                 if user.role == User.MANAGER:
                     try:
-                        group = Group.objects.get(name='Managers')
+                        group = Group.objects.get(name="Managers")
                         group.user_set.add(user)
                     except Group.DoesNotExist:
-                        messages.warning(request, "Manager group does not exist. User not added to group.")
+                        messages.warning(
+                            request,
+                            "Manager group does not exist. User not added to group.",
+                        )
 
                 # Show success message
-                messages.success(request, 'The user was added!!')
+                messages.success(request, "The user was added!!")
                 return redirect("chat:admin")  # <--- redirect to the admin page
 
             else:
-                messages.error(request, 'Form is invalid. Please check the input.')
+                messages.error(request, "Form is invalid. Please check the input.")
                 return render(request, "chat/add_user.html", {"form": form})
 
         else:

@@ -87,8 +87,8 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         message = Message.objects.create(body=message, sent_by=sent_by)
 
         if agent:
-            # message.created_at = User.objects.get(pk=agent)
-            message.agent = User.objects.get(pk=agent)
+            message.created_by = User.objects.get(pk=agent)
+            # message.agent = User.objects.get(pk=agent)
             message.save()
 
         self.room.messages.add(message)
