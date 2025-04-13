@@ -20,19 +20,23 @@ Watch the demo:
 ## 🛠️ Tech Stack
 
 - Backend: Django, Django Channels
-- Frontend: Tailwind CSS, JavaScript
+- Frontend: Tailwind CSS, flowbite, JavaScript
 - Database: SQLite
 - Authentication: Django authentication system
 
 
 ## 🙏 Credits
 
-This project was created and inspired by the YouTube tutorial from **Code With Stein**.
+- This project was created and inspired by the YouTube tutorial from **Code With Stein**.
 Watch the full tutorial here: YouTube Link. 
 
 https://youtu.be/9e7CTR2Ya4Y?feature=shared
 
 Special thanks to the creator for the detailed step-by-step guide on building this chat website using Django Channels and real-time communication techniques.
+
+- Hero section: https://tailwindflex.com/@amine-ghanim/hero-section-22
+- Icon: https://heroicons.com/
+
 
 
 
@@ -63,7 +67,7 @@ npm install
 Start Tailwind in watch mode:
 
 ```bash
-npm run build:css
+npx tailwindcss -i ./static/css/main.css -o ./static/css/main.min.css --watch
 ```
 
 5. Configure the Database

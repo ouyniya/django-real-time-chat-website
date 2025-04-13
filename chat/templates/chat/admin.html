@@ -2,37 +2,66 @@
 <h1 class="text-2xl">Chat admin</h1>
 
 {% if perms.user.add_user %}
-<div class="mt-8">
-  <h2 class="mb-4 text-lg">Users</h2>
-
-  <a
+<div class="mt-[25px]">
+  <button type="button" class="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
+    <a
     href="{% url 'chat:add_user' %}"
-    class="inline-block py-2 px-6 bg-rose-600 text-white rounded-xl"
-    >Add user</a
+    
+    >Add agent</a
   >
+  </button>
 
-  <div class="mt-6">
-    {% for user in users %}
-    <div class="grid grid-cols-4 gap-4 py-2 {% cycle 'bg-gray-100' '' %}">
-      <p class="px-2">
-        <a href="{% url 'chat:user_detail' user.pk %}"> {{user.name }} </a>
-      </p>
-      <p class="px-2">{{ user.email }}</p>
-      <p class="px-2">{{ user.get_role_display }}</p>
-      <p class="px-2 text-right">
 
-        {% if perms.user.edit_user %}
-          <a href="{% url 'chat:edit_user' user.pk %}" class="underline">Edit</a>
-        {% endif %}
+  <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-5">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+        <caption class="p-5 text-lg font-semibold text-left rtl:text-right 
+        text-gray-900 bg-white ">
+            Our agents
+            <p class="mt-1 text-sm font-normal text-gray-500">
+              These are all the agents available to assist with client chats. You can manage them and view detailed information below.
+            </p>
+        </caption>
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    Username
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Email
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    role
+                </th>
+                <th scope="col" class="px-6 py-3 text-center">
+                    action
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+          {% for user in users %}
+            <tr class="bg-white border-b  border-gray-200">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
+                  <a href="{% url 'chat:user_detail' user.pk %}"> {{user.name }} </a>
+                </th>
+                <td class="px-6 py-4">
+                  <p class="px-2">{{ user.email }}</p>
+                </td>
+                <td class="px-6 py-4">
+                  <p class="px-2">{{ user.get_role_display }}</p>
+                </td>
+                <td class="px-6 py-4 text-center">
+                   {% if perms.user.edit_user %}
+                      <a href="{% url 'chat:edit_user' user.pk %}" class="font-medium text-violet-600 hover:underline">Edit</a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 
-      </p>
-    </div>
-    {% endfor %}
-  </div>
 </div>
 {% endif %}
-
-<hr class="my-6" />
 
 <div class="mt-8">
   <h2 class="mb-4 text-lg">Rooms</h2>

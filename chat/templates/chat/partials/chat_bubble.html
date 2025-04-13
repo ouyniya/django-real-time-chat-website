@@ -1,11 +1,11 @@
 <div
   id="chat"
-  class="max-w-[300px] fixed right-2 bottom-2 p-2 bg-white border border-gray-100 rounded-md shadow-lg"
+  class="max-w-[300px] fixed right-2 bottom-2 p-0 bg-white border border-gray-100 rounded-lg shadow-lg"
 >
   <div id="chat_icon" class="flex items-center justify-center">
     <button
       id="chat_open"
-      class="w-[50px] h-[50px] flex items-center text-center"
+      class="w-[50px] h-[50px] flex items-center text-center p-2"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -25,22 +25,39 @@
   </div>
 
   <div id="chat_welcome" class="hidden">
-    <input
-      type="text"
-      name="name"
-      id="chat_name"
-      class="w-full mb-4 py-2 px-6 rounded-lg bg-gray-100"
-      placeholder="your name..."
-    />
+    <div
+      class="text-white bg-gradient-to-br from-purple-600 to-blue-500 font-medium text-sm px-5 py-2.5 text-center rounded-t-lg"
+    >
+      <p class="text-xl">Let's Chat</p>
+    </div>
 
-    <button id="chat_join" class="py-2 px-6 rounded-md text-white bg-rose-600">
-      Join Chat
-    </button>
+    <div class="py-3 px-5">
+      <div>
+        <p class="text-gray-800 text-md font-medium">We'd love to get to know you</p>
+        <p class="text-gray-500 text-xs font-light mt-1">Please share your name before we begin chatting! 😊</p>
+      </div>
+
+      <div class="relative mt-3 mb-4">
+        <input type="text" id="chat_name" class="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
+        <label for="chat_name" class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">your name</label>
+    </div>
+
+      <button
+        id="chat_join"
+        type="button"
+        class="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+      >
+        Join Chat
+      </button>
+    </div>
   </div>
 
   <div id="chat_room" class="hidden">
     <!-- <div id="chat_log" class="w-full mb-4 p-4 rounded-md h-[300px] overflow-scroll bg-rose-400"> -->
-    <div id="chat_log" class="w-full mb-4 p-4 rounded-md h-[300px] overflow-auto bg-gray-100">
+    <div
+      id="chat_log"
+      class="w-full mb-4 p-4 rounded-md h-[300px] overflow-auto bg-gray-100"
+    >
       <p class="text-sm text-gray-700">
         Welcome to our chat! Please type your message and wait for an agent to
         join...
