@@ -38,7 +38,7 @@ def create_room(request, uuid):
 # Admin panel view, shows all rooms and staff users
 @login_required  # Requires user to be logged in
 def admin(request):
-    rooms = Room.objects.all()  # Get all chat rooms
+    rooms = Room.objects.all().order_by("-created_at")  # Get all chat rooms
     users = User.objects.filter(is_staff=True)  # Get all staff users
 
     # Render admin template with room and user data

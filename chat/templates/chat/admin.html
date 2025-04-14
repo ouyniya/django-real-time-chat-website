@@ -3,68 +3,77 @@
 
 {% if perms.user.add_user %}
 <div class="mt-[25px]">
-  <button type="button" class="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
-    <a
-    href="{% url 'chat:add_user' %}"
-    
-    >Add agent</a
+  <button
+    type="button"
+    class="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
   >
+    <a href="{% url 'chat:add_user' %}">Add agent</a>
   </button>
-
 
   <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-5">
     <table class="w-full text-sm text-left rtl:text-right text-gray-500">
-        <caption class="p-5 text-lg font-semibold text-left rtl:text-right 
-        text-gray-900 bg-white ">
-            Our agents
-            <p class="mt-1 text-sm font-normal text-gray-500">
-              These are all the agents available to assist with client chats. You can manage them and view detailed information below.
-            </p>
-        </caption>
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50">
-            <tr>
-                <th scope="col" class="px-6 py-3">
-                    Username
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Email
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    role
-                </th>
-                <th scope="col" class="px-6 py-3 text-center">
-                    action
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-          {% for user in users %}
-            <tr class="bg-white border-b  border-gray-200">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
-                  <a href="{% url 'chat:user_detail' user.pk %}"> {{user.name }} </a>
-                </th>
-                <td class="px-6 py-4">
-                  <p class="px-2">{{ user.email }}</p>
-                </td>
-                <td class="px-6 py-4">
-                  <p class="px-2">{{ user.get_role_display }}</p>
-                </td>
-                <td class="px-6 py-4 text-center">
-                   {% if perms.user.edit_user %}
-                      <a href="{% url 'chat:edit_user' user.pk %}" class="font-medium text-violet-600 hover:underline">Edit</a>
-                    {% endif %}
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
+      <caption
+        class="p-5 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white"
+      >
+      <h1 class="text-xl text-gray-900 md:text-3xl lg:text-4xl"><span class="text-transparent bg-clip-text bg-gradient-to-r to-sky-600 from-fuchsia-500">Our agents</span></h1>
+        
+        <p class="mt-1 text-sm font-normal text-gray-500">
+          These are all the agents available to assist with client chats. You
+          can manage them and view detailed information below.
+        </p>
+      </caption>
+      <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+        <tr>
+          <th scope="col" class="px-6 py-3">Username</th>
+          <th scope="col" class="px-6 py-3">Email</th>
+          <th scope="col" class="px-6 py-3">role</th>
+          <th scope="col" class="px-6 py-3 text-center">action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in users %}
+        <tr class="bg-white border-b border-gray-200">
+          <th
+            scope="row"
+            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
+          >
+            <a href="{% url 'chat:user_detail' user.pk %}"> {{user.name }} </a>
+          </th>
+          <td class="px-6 py-4">
+            <p class="px-2">{{ user.email }}</p>
+          </td>
+          <td class="px-6 py-4 flex">
+            <span class="
+            {% if user.get_role_display == 'Manager' %}
+            text-yellow-700  bg-yellow-100 
+            {% else %}
+            text-gray-700 bg-gray-100 
+            {% endif %}
+            text-xs font-medium me-2 px-2.5 py-0.5 rounded-lg">
+              {{ user.get_role_display }}
+            </span>
+          </td>
+          <td class="px-6 py-4 text-center">
+            {% if perms.user.edit_user %}
+            <a
+              href="{% url 'chat:edit_user' user.pk %}"
+              class="font-medium text-violet-600 hover:text-indigo-600 hover:translate-x-1 visited:text-indigo-500"
+              >Edit</a
+            >
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
     </table>
+  </div>
 </div>
 
-</div>
+
 {% endif %}
 
-<div class="mt-8">
-  <h2 class="mb-4 text-lg">Rooms</h2>
+<div class="mt-10">
+  <h1 class="mb-3 text-2xl font-semibold text-gray-900 md:text-3xl lg:text-4xl"><span class="text-transparent bg-clip-text bg-gradient-to-r to-sky-600 from-fuchsia-500">Rooms</span></h1>
   {% include 'chat/partials/room_list.html' %}
 </div>
 
