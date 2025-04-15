@@ -12,6 +12,7 @@ const chatJoinElement = document.querySelector("#chat_join");
 const chatRoomElement = document.querySelector("#chat_room");
 const chatIconElement = document.querySelector("#chat_icon");
 const chatOpenElement = document.querySelector("#chat_open");
+const chatCloseElement = document.querySelector("#chat_close");
 const chatWelcomeElement = document.querySelector("#chat_welcome");
 const chatNameElement = document.querySelector("#chat_name");
 const chatLogElement = document.querySelector("#chat_log");
@@ -185,6 +186,19 @@ if (chatOpenElement) {
   };
 } else {
   // console.log("Button not found.");
+}
+
+if (chatCloseElement) {
+  console.log("Button found!");
+  chatCloseElement.onclick = function (e) {
+    e.preventDefault();
+    chatWelcomeElement.classList.add("hidden");
+    chatIconElement.classList.remove("hidden");
+
+    return false;
+  };
+} else {
+  console.log("Button not found.");
 }
 
 if (chatJoinElement) {

@@ -2,6 +2,8 @@
   id="chat"
   class="max-w-[300px] fixed right-2 bottom-2 p-0 bg-white border border-gray-100 rounded-lg shadow-lg"
 >
+
+<!-- chat icon -->
   <div id="chat_icon" class="flex items-center justify-center">
     <button
       id="chat_open"
@@ -13,7 +15,7 @@
         viewBox="0 0 24 24"
         stroke-width="1.5"
         stroke="currentColor"
-        class="text-rose-600"
+        class="text-indigo-600"
       >
         <path
           stroke-linecap="round"
@@ -24,7 +26,18 @@
     </button>
   </div>
 
-  <div id="chat_welcome" class="hidden">
+  <!-- welcome to chat -->
+  <div id="chat_welcome" class="hidden relative">
+
+    <!-- close button -->
+    <button id="chat_close" class="w-5 h-5 opacity-75 text-white text-xs rounded-full absolute top-2 right-2">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+      </svg>
+      
+    </button>
+
+    <!-- begin welcome -->
     <div
       class="text-white bg-gradient-to-br from-purple-600 to-blue-500 font-medium text-sm px-5 py-2.5 text-center rounded-t-lg"
     >
@@ -37,11 +50,13 @@
         <p class="text-gray-500 text-xs font-light mt-1">Please share your name before we begin chatting! 😊</p>
       </div>
 
+      <!-- input name -->
       <div class="relative mt-3 mb-4">
         <input type="text" id="chat_name" class="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
         <label for="chat_name" class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">your name</label>
     </div>
 
+      <!-- join button -->
       <button
         id="chat_join"
         type="button"
@@ -53,6 +68,7 @@
     </div>
   </div>
 
+  <!-- chat room -->
   <div id="chat_room" class="hidden">
     <!-- <div id="chat_log" class="w-full mb-4 p-4 rounded-md h-[300px] overflow-scroll bg-rose-400"> -->
     <div
