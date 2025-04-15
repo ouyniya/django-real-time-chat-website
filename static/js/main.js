@@ -189,9 +189,9 @@ if (chatOpenElement) {
 }
 
 if (chatCloseElement) {
-  console.log("Button found!");
   chatCloseElement.onclick = function (e) {
     e.preventDefault();
+    console.log("Button found!");
     chatWelcomeElement.classList.add("hidden");
     chatIconElement.classList.remove("hidden");
 
@@ -220,6 +220,10 @@ if (chatJoinElement) {
 if (chatSubmitElement) {
   chatSubmitElement.onclick = function (e) {
     e.preventDefault();
+    if (chatInputElement.value.trim() === "") {
+      chatSubmitElement.disabled = true;
+      return false;
+    }
     sendMessage();
     return false;
   };
@@ -228,25 +232,41 @@ if (chatSubmitElement) {
 }
 
 if (chatInputElement) {
-  chatInputElement.onkeyup = function (e) {
-    if (e.keyCode === 13) {
-      sendMessage();
-    }
+  chatInputElement.onfocus = function (e) {
+    e.preventDefault();
+
+    chatSubmitElement.disabled = false;
+    return false;
   };
 } else {
   // console.log("Button not found.");
 }
 
 if (chatInputElement) {
-  chatInputElement.onfocus = function (e) {
-    chatSocket.send(
-      JSON.stringify({
-        type: "update",
-        message: "writing_active",
-        name: chatName,
-      })
-    );
+  chatInputElement.onkeyup = function (e) {
+    if (e.keyCode !== 13 || chatInputElement.value.trim() === "") {
+      chatSubmitElement.disabled = true;
+
+      return false;
+    }
+    sendMessage();
   };
 } else {
   // console.log("Button not found.");
+}
+
+if (chatInputElement) {
+  chatInputElement.oninput = function () {
+    if (chatInputElement.value.trim().length > 0) {
+      chatSocket.send(
+        JSON.stringify({
+          type: "update",
+          message: "writing_active",
+          name: chatName,
+        })
+      );
+    }
+  };
+} else {
+  // console.log("Input element not found.");
 }

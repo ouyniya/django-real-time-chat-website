@@ -43,8 +43,8 @@
       <ul class="flex gap-[32px]">
         <li class="cursor-pointer hover:text-indigo-500 hover:-translate-y-0.5 transition-all"><a href="{% url 'core:index' %}">Home</a></li>
         <li class="cursor-pointer hover:text-indigo-500 hover:-translate-y-0.5 transition-all"><a href="{% url 'core:about' %}">About</a></li>
-        <li class="cursor-pointer hover:text-indigo-500 hover:-translate-y-0.5 transition-all">Profile</li>
-        <li class="cursor-pointer hover:text-indigo-500 hover:-translate-y-0.5 transition-all">Blog</li>
+        <!-- <li class="cursor-pointer hover:text-indigo-500 hover:-translate-y-0.5 transition-all">Profile</li>
+        <li class="cursor-pointer hover:text-indigo-500 hover:-translate-y-0.5 transition-all">Blog</li> -->
 
         {% if request.user.is_authenticated %}
         <li class="cursor-pointer">
@@ -57,7 +57,7 @@
         {% endif %}
         </li>
 
-        <li class="cursor-pointer hover:text-indigo-500 hover:-translate-y-0.5 transition-all">Contact us</li>
+        <li class="cursor-pointer hover:text-indigo-500 hover:-translate-y-0.5 transition-all"><a href="{% url 'core:contact' %}">Contact us</a></li>
       </ul>
     </div>
 

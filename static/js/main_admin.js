@@ -79,7 +79,7 @@ function onChatMessage(data) {
           ${data.initials}
         </div>
         <!-- Message Placeholder -->
-          <div class="bg-gray-300 p-3 rounded-r-lg rounded-bl-lg">
+          <div class="bg-gray-300 p-3 rounded-lg">
             <div class="animate-pulse flex justify-center items-center space-x-1 h-full">
               <div class="rounded-full bg-gray-400 h-2 w-2"></div>
               <div class="rounded-full bg-gray-400 h-2 w-2"></div>

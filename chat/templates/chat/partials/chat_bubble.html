@@ -2,8 +2,7 @@
   id="chat"
   class="max-w-[300px] fixed right-2 bottom-2 p-0 bg-white border border-gray-100 rounded-lg shadow-lg"
 >
-
-<!-- chat icon -->
+  <!-- chat icon -->
   <div id="chat_icon" class="flex items-center justify-center">
     <button
       id="chat_open"
@@ -28,13 +27,25 @@
 
   <!-- welcome to chat -->
   <div id="chat_welcome" class="hidden relative">
-
     <!-- close button -->
-    <button id="chat_close" class="w-5 h-5 opacity-75 text-white text-xs rounded-full absolute top-2 right-2">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-        <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+    <button
+      id="chat_close"
+      class="w-5 h-5 opacity-75 text-white text-xs rounded-full absolute top-2 right-2"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="size-6"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+        />
       </svg>
-      
     </button>
 
     <!-- begin welcome -->
@@ -46,15 +57,28 @@
 
     <div class="py-3 px-5">
       <div>
-        <p class="text-gray-800 text-md font-medium">We'd love to get to know you</p>
-        <p class="text-gray-500 text-xs font-light mt-1">Please share your name before we begin chatting! 😊</p>
+        <p class="text-gray-800 text-md font-medium">
+          We'd love to get to know you
+        </p>
+        <p class="text-gray-500 text-xs font-light mt-1">
+          Please share your name before we begin chatting! 😊
+        </p>
       </div>
 
       <!-- input name -->
       <div class="relative mt-3 mb-4">
-        <input type="text" id="chat_name" class="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
-        <label for="chat_name" class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">your name</label>
-    </div>
+        <input
+          type="text"
+          id="chat_name"
+          class="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+          placeholder=" "
+        />
+        <label
+          for="chat_name"
+          class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto"
+          >your name</label
+        >
+      </div>
 
       <!-- join button -->
       <button
@@ -64,36 +88,98 @@
       >
         Join Chat
       </button>
-      
     </div>
   </div>
 
   <!-- chat room -->
   <div id="chat_room" class="hidden">
     <!-- <div id="chat_log" class="w-full mb-4 p-4 rounded-md h-[300px] overflow-scroll bg-rose-400"> -->
+
+    <!-- header -->
     <div
-      id="chat_log"
-      class="w-full mb-4 p-4 rounded-md h-[300px] overflow-auto bg-gray-100"
+      class="text-white bg-gradient-to-br from-purple-600 to-blue-500 font-medium text-sm px-5 py-2.5 text-center rounded-t-lg"
     >
-      <p class="text-sm text-gray-700">
-        Welcome to our chat! Please type your message and wait for an agent to
-        join...
-      </p>
+      <p class="text-xl">Let's Chat</p>
     </div>
 
-    <input
-      type="text"
-      name="body"
-      id="chat_message_input"
-      class="w-full mb-4 p-4 bg-gray-100 rounded-md"
-      placeholder="type your message here..."
-    />
+    <!-- log -->
+    <div class="p-2">
 
-    <button
-      id="chat_message_submit"
-      class="py-2 px-6 bg-rose-600 text-white rounded-md"
-    >
-      Send
-    </button>
+      <div
+        id="chat_log"
+        class="w-full min-w-[284px] h-[300px] mb-2 p-2 rounded-md overflow-auto bg-gray-50"
+      >
+        <!-- alert -->
+        <div
+          id="chat_log_alert"
+          class="flex items-center p-4 mb-4 text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400"
+          role="alert"
+        >
+          <svg
+            class="shrink-0 w-4 h-4"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
+            <path
+              d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"
+            />
+          </svg>
+          <span class="sr-only">Info</span>
+          <div class="ms-3 text-xs font-medium">
+            Welcome to our chat! Please type your message and wait for an agent
+            to join...
+          </div>
+          <button
+            type="button"
+            class="ms-auto -mx-1.5 -my-1.5 bg-blue-50 text-blue-500 rounded-lg focus:ring-2 focus:ring-blue-400 p-1.5 hover:bg-blue-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-blue-400 dark:hover:bg-gray-700"
+            data-dismiss-target="#chat_log_alert"
+            aria-label="Close"
+          >
+            <span class="sr-only">Close</span>
+            <svg
+              class="w-3 h-3"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 14 14"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+              />
+            </svg>
+          </button>
+        </div>
+        
+      </div>
+
+      <!-- text message -->
+      <div class="relative mt-3 mb-4">
+        <input
+          type="text"
+          id="chat_message_input"
+          class="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+          placeholder=" "
+        />
+        <label
+          for="chat_name"
+          class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto"
+          >your message</label
+        >
+      </div>
+
+      <!-- send message -->
+      <button
+        id="chat_message_submit"
+        class="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 disabled:hover:cursor-not-allowed disabled:bg-gray-100"
+      >
+        Send
+      </button>
+    </div>
   </div>
 </div>

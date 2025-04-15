@@ -4,12 +4,12 @@
 
 <h1 class="mb-6 text-2xl">Edit user</h1>
 
-<form method="POST" action=".">
+<form method="POST" action="." class="text-md">
     {% csrf_token %} 
     
     {{ form.as_p }}
 
-  <button class="mt-6 inline-block py-2 px-6 bg-rose-600 text-white rounded-xl">
+  <button class="mt-6 inline-block py-3 px-6 my-btn-primary text-white rounded-xl">
     Save changes
   </button>
 </form>
