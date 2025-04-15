@@ -9,12 +9,21 @@ In this exciting project, we build a dynamic chat website by leveraging Django C
 
 ## 📸 Screenshots / Demo
 
+![Screenshot 1](https://i.imgur.com/RLHtJVc.png)
+![Screenshot 2](https://i.imgur.com/QjWHjFq.png)
+![Screenshot 3](https://i.imgur.com/XBzBBdQ.png)
+![Screenshot 4](https://i.imgur.com/z8mtNKH.png) ![Screenshot 5](https://i.imgur.com/JGlE0YF.png)
+![Screenshot 6](https://i.imgur.com/RvgHEtt.png)
+
+
+
 ### 🎥 Project Walkthrough
 
 Click the image below to watch a video walkthrough of the project:
 Watch the demo: 
 
-[![Watch the demo]()]()
+[![Watch the demo](https://img.youtube.com/vi/OiUY6K5XySA/0.jpg)](https://youtu.be/OiUY6K5XySA)
+
 
 
 ## 🛠️ Tech Stack

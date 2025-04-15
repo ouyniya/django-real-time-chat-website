@@ -2093,6 +2093,11 @@ html {
   padding-right: 0px;
 }
 
+.px-3{
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
 .pb-2\.5{
   padding-bottom: 0.625rem;
 }
